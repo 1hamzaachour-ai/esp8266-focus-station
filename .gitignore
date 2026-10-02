@@ -1,0 +1,13 @@
+# Build outputs
+build/
+*.bin
+*.elf
+*.map
+
+# PC test bench binaries
+pc_test/test
+pc_test/*.exe
+
+# Editor folders
+.vscode/
+.idea/

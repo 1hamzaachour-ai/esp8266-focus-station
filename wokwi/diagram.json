@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "author": "Hamza Achour",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": -185, "left": -60, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-tm1637-7segment", "id": "seg", "top": -10, "left": 210, "attrs": { "color": "red" } },
+    { "type": "wokwi-pushbutton", "id": "btn", "top": 150, "left": 220, "attrs": { "color": "green" } },
+    { "type": "wokwi-buzzer", "id": "bz", "top": 110, "left": 360, "attrs": { "volume": "0.2" } },
+    { "type": "wokwi-led", "id": "led", "top": 120, "left": -150, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 200, "left": -130, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+
+    [ "lcd:VCC", "esp:VIN", "red", [] ],
+    [ "lcd:GND", "esp:GND.2", "black", [] ],
+    [ "lcd:SDA", "esp:D21", "green", [] ],
+    [ "lcd:SCL", "esp:D22", "yellow", [] ],
+
+    [ "seg:VCC", "esp:3V3", "red", [] ],
+    [ "seg:GND", "esp:GND.1", "black", [] ],
+    [ "seg:CLK", "esp:D18", "blue", [] ],
+    [ "seg:DIO", "esp:D19", "violet", [] ],
+
+    [ "btn:1.l", "esp:D27", "orange", [] ],
+    [ "btn:2.l", "esp:GND.1", "black", [] ],
+
+    [ "esp:D25", "r1:1", "white", [] ],
+    [ "r1:2", "led:A", "white", [] ],
+    [ "led:C", "esp:GND.2", "black", [] ],
+
+    [ "bz:2", "esp:D26", "purple", [] ],
+    [ "bz:1", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

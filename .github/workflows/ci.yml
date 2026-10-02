@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pc-tests:
+    name: PC test bench (${{ matrix.board }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - board: esp32
+            flags: ""
+          - board: esp8266
+            flags: "-DESP8266"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run the test bench
+        working-directory: pc_test
+        run: |
+          g++ -std=c++17 -O2 ${{ matrix.flags }} -I stubs -I ../focus_station test.cpp -o test
+          ./test
+
+  compile:
+    name: Compile (${{ matrix.fqbn }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - fqbn: esp8266:esp8266:nodemcuv2
+            platform: esp8266:esp8266
+            url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+          - fqbn: esp32:esp32:esp32
+            platform: esp32:esp32
+            url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.fqbn }}
+          platforms: |
+            - name: ${{ matrix.platform }}
+              source-url: ${{ matrix.url }}
+          libraries: |
+            - name: LiquidCrystal I2C
+            - name: TM1637
+          sketch-paths: |
+            - focus_station
+            - i2c_scanner
