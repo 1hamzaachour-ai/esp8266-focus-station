@@ -1,9 +1,9 @@
-# Focus Station: an ESP32 / ESP8266 Pomodoro timer
+# ESP8266 Focus Station
 
-[![CI](https://github.com/1hamzaachour-ai/esp32-focus-station/actions/workflows/ci.yml/badge.svg)](https://github.com/1hamzaachour-ai/esp32-focus-station/actions/workflows/ci.yml)
+[![CI](https://github.com/1hamzaachour-ai/esp8266-focus-station/actions/workflows/ci.yml/badge.svg)](https://github.com/1hamzaachour-ai/esp8266-focus-station/actions/workflows/ci.yml)
 
 A one-button Pomodoro timer: 25-minute focus sessions and 5-minute breaks on a TM1637 4-digit display, with a status LED, a buzzer and an optional 16×2 I2C LCD.
-The same Arduino sketch runs on an **ESP32 DevKit** or a **NodeMCU ESP8266**. The pins are chosen from the board you compile for.
+It's built for the **NodeMCU ESP8266**, and the same sketch also runs on an **ESP32 DevKit**. The pins are chosen from the board you compile for.
 
 ## Features
 
