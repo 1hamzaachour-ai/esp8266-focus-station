@@ -13,6 +13,13 @@ using std::max;
 
 typedef uint8_t byte;
 
+// The real cores define these; the firmware refuses to build for any other board.
+#if defined(ESP8266)
+#define ARDUINO_ARCH_ESP8266 1
+#else
+#define ARDUINO_ARCH_ESP32 1
+#endif
+
 #if defined(ESP8266)
 #define RF_DISABLED 4
 #define RF_MODE(mode) int __get_rf_mode() { return mode; }

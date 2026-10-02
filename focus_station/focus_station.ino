@@ -26,6 +26,10 @@
     "TM1637"            by Avishay Orpaz
 */
 
+#if !defined(ARDUINO_ARCH_ESP8266) && !defined(ARDUINO_ARCH_ESP32)
+#error "Focus Station needs an ESP8266 or ESP32 board. Tools > Board > esp8266 > NodeMCU 1.0 (ESP-12E Module), or esp32 > ESP32 Dev Module."
+#endif
+
 #include <Wire.h>
 #if defined(ESP8266)
 #include <EEPROM.h>

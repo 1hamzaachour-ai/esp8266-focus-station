@@ -4,6 +4,10 @@
   into LCD_ADDR in focus_station.ino (usually 0x27 or 0x3F).
 */
 
+#if !defined(ARDUINO_ARCH_ESP8266) && !defined(ARDUINO_ARCH_ESP32)
+#error "This scanner needs an ESP8266 or ESP32 board. Tools > Board > esp8266 > NodeMCU 1.0 (ESP-12E Module), or esp32 > ESP32 Dev Module."
+#endif
+
 #include <Wire.h>
 
 #if defined(ESP8266)

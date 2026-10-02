@@ -72,11 +72,11 @@ NodeMCU notes:
 5. Under **Tools → Board**, pick **NodeMCU 1.0 (ESP-12E Module)** or **ESP32 Dev Module**, then the board's port under **Tools → Port**.
 6. Click **Upload**.
 
-With arduino-cli:
+With arduino-cli: both sketch folders have a `sketch.yaml` that makes the **NodeMCU ESP8266 the default board**, so no `--fqbn` is needed for it.
 
 ```sh
-arduino-cli compile --upload --fqbn esp8266:esp8266:nodemcuv2 -p COM6 focus_station
-arduino-cli compile --upload --fqbn esp32:esp32:esp32       -p COM5 focus_station
+arduino-cli compile --upload -p COM6 focus_station                          # NodeMCU ESP8266 (default)
+arduino-cli compile --upload --fqbn esp32:esp32:esp32 -p COM5 focus_station   # ESP32
 ```
 
 If Windows shows no COM port for a NodeMCU, it needs the CP210x (or CH340) USB driver. On Windows 11 it is offered under **Settings → Windows Update → Advanced options → Optional updates → Driver updates**.
@@ -131,6 +131,7 @@ No compiler on Windows? `pip install ziglang`, then use `python -m ziglang c++` 
 |---|---|---|
 | No COM port | Charge-only cable, or missing USB driver | Use a data cable. Install the CP210x / CH340 driver (see [Build and upload](#build-and-upload)). |
 | Upload stuck at `Connecting...` | Board didn't enter upload mode | Hold **FLASH** (NodeMCU) or **BOOT** (ESP32) while the upload starts. |
+| Compile stops with `Focus Station needs an ESP8266 or ESP32 board` | A non-ESP board (for example Arduino Uno) is selected | **Tools → Board → esp8266 → NodeMCU 1.0 (ESP-12E Module)**. |
 | `This chip is ESP8266, not ESP32` (or the reverse) | Wrong board selected | Pick the board that matches the chip. |
 | A digit, the LED or the buzzer stays off during the self-test | Wiring | Check that part's wires against the table above. |
 | One beep about 2 s after power-on, then the button does nothing | Button legs on the same internal pair | Use two **diagonally opposite** legs. |
